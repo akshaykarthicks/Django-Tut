@@ -1,0 +1,5 @@
+{
+  "name": "Django Expert AI",
+  "description": "An AI-powered Django instructor that provides expert answers to your Django questions by synthesizing information from official documentation and community resources.",
+  "requestFramePermissions": []
+}

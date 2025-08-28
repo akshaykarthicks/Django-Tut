@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import hljs from 'highlight.js/lib/core';
+import python from 'highlight.js/lib/languages/python';
+
+hljs.registerLanguage('python', python);
 
 interface CodeBlockProps {
   code: string;
@@ -6,6 +10,13 @@ interface CodeBlockProps {
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
   const [copied, setCopied] = useState(false);
+  const codeRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (codeRef.current) {
+      hljs.highlightElement(codeRef.current);
+    }
+  }, [code]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code).then(() => {
@@ -22,8 +33,8 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
       >
         {copied ? 'Copied!' : 'Copy'}
       </button>
-      <pre className="p-4 text-sm text-gray-200 overflow-x-auto">
-        <code>{code}</code>
+      <pre className="p-4 text-sm overflow-x-auto">
+        <code ref={codeRef} className="python">{code}</code>
       </pre>
     </div>
   );

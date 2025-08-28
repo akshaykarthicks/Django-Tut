@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Header } from './components/Header';
-import { SearchForm } from './components/SearchForm';
-import { ResponseDisplay } from './components/ResponseDisplay';
+import { Header, SearchForm, ResponseDisplay, Footer } from './components';
 import { getDjangoAnswer } from './services/geminiService';
 import type { GeminiResponse } from './types';
 
@@ -51,6 +49,7 @@ const App: React.FC = () => {
           )}
           <ResponseDisplay isLoading={isLoading} response={response} />
         </main>
+        <Footer />
       </div>
     </div>
   );

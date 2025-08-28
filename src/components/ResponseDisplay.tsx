@@ -45,7 +45,7 @@ const MarkdownRenderer: React.FC<{ content: string }> = ({ content }) => {
   const blocks = content.split('\n\n').filter(block => block.trim() !== '');
 
   return (
-    <>
+    <div className="prose prose-invert max-w-none">
       {blocks.map((block, index) => {
         const lines = block.split('\n');
         
@@ -82,7 +82,7 @@ const MarkdownRenderer: React.FC<{ content: string }> = ({ content }) => {
           </p>
         );
       })}
-    </>
+    </div>
   );
 };
 
@@ -99,46 +99,50 @@ export const ResponseDisplay: React.FC<ResponseDisplayProps> = ({ isLoading, res
   const parsedSections = parseResponseText(response.text);
 
   return (
-    <div className="mt-8 bg-gray-900 border border-gray-700 rounded-lg p-6 animate-fade-in">
+    <div className="mt-8 space-y-8">
       {parsedSections.map((section, index) => {
         const isCodeExample = section.title.toLowerCase().includes('code example');
         const codeContentMatch = section.content.match(/```python\n([\s\S]*?)```/);
         const hasOnlyNoCodeMessage = section.content.trim() === 'No code example is necessary for this query.';
 
         return (
-          <div key={index} className="mb-6 last:mb-0">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">{section.title}</h2>
-            {isCodeExample && codeContentMatch ? (
-              <CodeBlock code={codeContentMatch[1]} />
-            ) : isCodeExample && hasOnlyNoCodeMessage ? (
-              <p className="text-gray-400 italic">{section.content}</p>
-            ) : (
-              <MarkdownRenderer content={section.content} />
-            )}
+          <div key={index} className="bg-gray-900 border border-gray-700 rounded-lg p-6 animate-fade-in">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">{section.title}</h2>
+            <div className="border-t border-gray-700 pt-4">
+              {isCodeExample && codeContentMatch ? (
+                <CodeBlock code={codeContentMatch[1]} />
+              ) : isCodeExample && hasOnlyNoCodeMessage ? (
+                <p className="text-gray-400 italic">{section.content}</p>
+              ) : (
+                <MarkdownRenderer content={section.content} />
+              )}
+            </div>
           </div>
         );
       })}
 
       {response.sources && response.sources.length > 0 && (
-        <div className="mt-8 pt-6 border-t border-gray-700">
-          <h3 className="text-lg sm:text-xl font-bold text-white mb-3">Sources</h3>
-          <ul className="space-y-2">
-            {response.sources.map((source, index) =>
-              source.web ? (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="text-white mt-1">&#10148;</span>
-                  <a
-                    href={source.web.uri}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:text-gray-300 underline transition-colors"
-                  >
-                    {source.web.title}
-                  </a>
-                </li>
-              ) : null
-            )}
-          </ul>
+        <div className="bg-gray-900 border border-gray-700 rounded-lg p-6 animate-fade-in">
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-4">Sources</h3>
+          <div className="border-t border-gray-700 pt-4">
+            <ul className="space-y-2">
+              {response.sources.map((source, index) =>
+                source.web ? (
+                  <li key={index} className="flex items-start gap-2">
+                    <span className="text-white mt-1">&#10148;</span>
+                    <a
+                      href={source.web.uri}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    className="text-white hover:text-accent underline transition-colors"
+                    >
+                      {source.web.title}
+                    </a>
+                  </li>
+                ) : null
+              )}
+            </ul>
+          </div>
         </div>
       )}
     </div>

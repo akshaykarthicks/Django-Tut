@@ -107,7 +107,7 @@ export const ResponseDisplay: React.FC<ResponseDisplayProps> = ({ isLoading, res
 
         return (
           <div key={index} className="mb-6 last:mb-0">
-            <h2 className="text-2xl font-bold text-white mb-3">{section.title}</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">{section.title}</h2>
             {isCodeExample && codeContentMatch ? (
               <CodeBlock code={codeContentMatch[1]} />
             ) : isCodeExample && hasOnlyNoCodeMessage ? (
@@ -121,7 +121,7 @@ export const ResponseDisplay: React.FC<ResponseDisplayProps> = ({ isLoading, res
 
       {response.sources && response.sources.length > 0 && (
         <div className="mt-8 pt-6 border-t border-gray-700">
-          <h3 className="text-xl font-bold text-white mb-3">Sources</h3>
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-3">Sources</h3>
           <ul className="space-y-2">
             {response.sources.map((source, index) =>
               source.web ? (

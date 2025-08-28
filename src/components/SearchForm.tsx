@@ -10,18 +10,19 @@ interface SearchFormProps {
 export const SearchForm: React.FC<SearchFormProps> = ({ query, setQuery, handleSubmit, isLoading }) => {
   return (
     <form onSubmit={handleSubmit} className="mt-4">
-      <div className="relative">
+      <div className="sm:relative">
         <textarea
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="e.g., How do I optimize a complex Django query with prefetch_related?"
-          className="w-full h-32 p-4 pr-32 text-white bg-gray-900 border-2 border-gray-700 rounded-lg focus:ring-2 focus:ring-white focus:border-white focus:outline-none transition-shadow resize-none"
+          className="w-full p-4 sm:pr-32 text-white bg-gray-900 border-2 border-gray-700 rounded-lg focus:ring-2 focus:ring-white focus:border-white focus:outline-none transition-shadow resize-none"
+          rows={5}
           disabled={isLoading}
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="absolute top-1/2 right-4 -translate-y-1/2 flex items-center justify-center gap-2 px-6 py-3 font-semibold text-black bg-white rounded-md hover:bg-gray-300 disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-white"
+          className="w-full mt-4 sm:absolute sm:top-1/2 sm:right-4 sm:-translate-y-1/2 sm:w-auto flex items-center justify-center gap-2 px-6 py-3 font-semibold text-black bg-white rounded-md hover:bg-gray-300 disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-white"
         >
           {isLoading ? (
             <>

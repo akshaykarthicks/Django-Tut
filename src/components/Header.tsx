@@ -9,9 +9,9 @@ const DjangoIcon = () => (
 export const Header: React.FC = () => {
   return (
     <header className="text-center py-6 sm:py-8">
-      <div className="flex items-center justify-center gap-4 mb-2">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
         <DjangoIcon />
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white">
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white text-center sm:text-left">
           Django Expert AI
         </h1>
       </div>

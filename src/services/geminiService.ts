@@ -2,11 +2,13 @@
 import { GoogleGenAI } from "@google/genai";
 import type { GeminiResponse, GroundingChunk } from '../types';
 
-if (!process.env.GEMINI_API_KEY) {
-  throw new Error("GEMINI_API_KEY environment variable not set");
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+if (!apiKey) {
+  throw new Error("VITE_GEMINI_API_KEY environment variable not set");
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const ai = new GoogleGenAI(apiKey);
 
 const createPrompt = (userQuery: string): string => {
   return `

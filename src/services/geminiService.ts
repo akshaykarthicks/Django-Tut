@@ -8,7 +8,7 @@ if (!apiKey) {
   throw new Error("VITE_GEMINI_API_KEY environment variable not set");
 }
 
-const ai = new GoogleGenAI(apiKey);
+const ai = new GoogleGenAI({ apiKey });
 
 const createPrompt = (userQuery: string): string => {
   return `
